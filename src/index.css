@@ -1,0 +1,249 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+nav{
+  background-color: #111 !important;
+}
+
+.btn-close{
+  position: absolute;
+  left: 95%;
+  height: 8%;
+  z-index: 200;
+}
+.jugadores-1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 5%;
+}
+.jugadores-2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.jugadores{
+  height: 30% !important;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #00ffd5;
+  overflow-x: scroll;
+  word-break: keep-all; /* this is optional, so the words keep in one line */
+  white-space: wrap;
+
+
+  
+}
+.card{
+  height: 90% !important;
+  width: 16% !important;
+  background-color: #48ff00;
+}
+
+.pais{
+  width: 100%;
+  background-color: #002bff;
+}
+
+
+.pais img{
+  width: 100%;
+  
+}
+
+.fifa{
+  position: absolute;
+  left: auto;
+}
+.grid{
+  display: grid;
+  position: relative;
+  height: 100%;
+  column-gap: 3%;
+  row-gap: 10%;
+  width: 100%;
+  background-color: #48ff00;
+  top: 20%;
+  z-index: 500;
+  grid-template-rows: repeat(2, 10vw);
+  grid-template-columns: repeat(3, 10vh);
+}
+.card img{
+  height: 100% !important;
+  width: 100%;
+  
+}
+
+
+.nombre-p{
+  
+  position: absolute;
+  top:0%;
+  z-index: 200;
+  font-size:2rem;
+}
+.mis-fichas{
+  background-color: #fff;
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  z-index: 100;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 10px #111;
+
+}
+
+.paises{
+  background-color: #fff;
+  width: 60%;
+  height: 70%;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  z-index: 200;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 10px #111;
+
+}
+
+.logo-panini{
+  position: absolute;
+  width: 10% !important;
+  left: 88%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.fondo{
+  background-color: aqua;
+  border-width:2px;
+  border-style:solid;
+  border-color:black;
+  position: relative;
+  width: 80vw;
+  left: 12vw;
+}
+.jugadores-equipo{
+  position: absolute;
+  top:20%;
+  left: 5%;
+  background-color: #002bff;
+  padding-right: 5%;
+}
+.fondo-album{
+  background-color: aqua;
+  position: relative;
+  height: 100%;
+  
+
+}
+
+.fondo-album p{
+  position: absolute;
+  top:0%;
+  z-index: 200;
+  font-size:4rem;
+  left: auto;
+
+}
+
+
+
+.morado{
+  position: relative;
+  height: fit-content;
+  object-fit:fill;
+
+}
+.opciones{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  width: 75%;
+  left: 12.5%;
+  justify-content: space-around;
+  z-index: 1;
+}
+
+
+.fondo img{
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 400;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
