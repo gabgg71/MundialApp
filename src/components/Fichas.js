@@ -10,6 +10,7 @@ export const Fichas =({setFichas})=>{
         "equipo": "Portugal",
         "cantidad": 0
     },
+    
     {
         "id": "6358a03275d0fc0fd6a1e929",
         "jugador": " José Sá",
