@@ -26,9 +26,6 @@ export const Reclama=({setReclama})=>{
         "cantidad":operacion.cantidad,
         "pegado":false
     }
-
-    console.log(nuevaFicha)
-    console.log([...misFichas, estructura])
     //misFichas.add(nuevaFicha)
     setMisFichas([...misFichas, estructura]);
     console.log(`esta son fichas resultado ${misFichas}`)
