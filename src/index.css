@@ -18,8 +18,17 @@ nav{
   display: flex;
   flex-direction: row;
   width: 60vw;
+  margin-top: 8%;
+  margin-left: 2%;
   overflow-y: scroll;
   overflow-x: scroll;
+  background-color: rgb(48, 48, 48);
+}
+
+b{
+  display: block;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 .tarjeta{
@@ -69,11 +78,23 @@ nav{
 }
 
 .reclama{
-  height: 60% !important;
+  margin-top: 10%;
+  height: 65% !important;
+  background-color: rgb(48, 48, 48);
+  color: white;
+  width: 30%;
+  margin-left: 35%;
+  border-radius: 20px;
+}
+
+.reclama img{
+  border-radius: 20px;
+  margin-top: 5%;
 }
 
 .reclamaB{
   left:40%;
+  margin-top: 3%;
 }
 
 .ajuste{
@@ -87,20 +108,20 @@ nav{
 
 .reclama p:nth-child(2){
   position: absolute;
-  left: 40% !important;
-  top: 50%;
+  left: 50% !important;
+  top: 60%;
 }
 
 .reclama p:nth-child(3){
   position: absolute;
   left: 40% !important;
-  top: 58%;
+  top: 68%;
 }
 
 .reclama p:nth-child(4){
   position: absolute;
   left: 40% !important;
-  top: 64%;
+  top: 75%;
 }
 
 .card{
@@ -192,7 +213,7 @@ nav{
   text-align: center;
 }
 .mis-fichas{
-  background-color: #fff;
+  background-color: rgb(63, 63, 63);
   width: 80%;
   height: 80%;
   position: absolute;
@@ -211,10 +232,17 @@ nav{
   position: absolute;
   top: 10%;
   left: 20%;
-  z-index: 200;
+  z-index: 20000;
   border-radius: 10px;
   box-shadow: 10px 10px 10px 10px #111;
 
+}
+
+.titulo{
+  color: rgb(242, 227, 227);
+  position: absolute;
+  left: 40%;
+  padding-top: 2%;
 }
 
 .logo-panini{

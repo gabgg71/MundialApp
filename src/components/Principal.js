@@ -3,6 +3,7 @@ import { Fichas } from './Fichas';
 import { Album } from './Album';
 import { Navbar } from './Navbar';
 import { Reclama } from './Reclama';
+import { Repetidas } from './Repetidas';
 
 export const Principal=()=>{
     const [fichas, setFichas] = useState(false)
@@ -21,9 +22,10 @@ export const Principal=()=>{
             {fichas && <Fichas setFichas={setFichas}/>}
             {album && <Album setAlbum={setAlbum} index={0}/>}
             {reclama && <Reclama setReclama={setReclama}/>}
+            {repetidas && <Repetidas setRepetidas={setRepetidas}/>}
             <div className='opciones'>
             <button className='glow-on-hover' onClick={()=>{setFichas(true)}}>Ver mis fichas</button>
-            <button className='glow-on-hover' onClick={()=>{setFichas(true)}}>Ver fichas repetidas</button>
+            <button className='glow-on-hover' onClick={()=>{setRepetidas(true)}}>Ver fichas repetidas</button>
             <button className='glow-on-hover' onClick={()=>{setAlbum(true)}}>Album Panini</button>
             <button className='glow-on-hover' onClick={()=>{setReclama(true)}}>Reclamar fichas</button>
 
