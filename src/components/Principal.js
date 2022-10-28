@@ -6,6 +6,7 @@ import { Reclama } from './Reclama';
 
 export const Principal=()=>{
     const [fichas, setFichas] = useState(false)
+    const [repetidas, setRepetidas] = useState(false)
     const [album, setAlbum] = useState(false)
     const [reclama, setReclama] = useState(false)
 
@@ -22,6 +23,7 @@ export const Principal=()=>{
             {reclama && <Reclama setReclama={setReclama}/>}
             <div className='opciones'>
             <button className='glow-on-hover' onClick={()=>{setFichas(true)}}>Ver mis fichas</button>
+            <button className='glow-on-hover' onClick={()=>{setFichas(true)}}>Ver fichas repetidas</button>
             <button className='glow-on-hover' onClick={()=>{setAlbum(true)}}>Album Panini</button>
             <button className='glow-on-hover' onClick={()=>{setReclama(true)}}>Reclamar fichas</button>
 

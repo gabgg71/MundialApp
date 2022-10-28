@@ -14,6 +14,27 @@ nav{
   background-color: #111 !important;
 }
 
+.fichas_tengo{
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.tarjeta{
+  width: 5vw !important;
+  flex: 0 0 20%;
+  
+  white-space: nowrap;
+  background: rgb(0, 0, 0);
+  color: white;
+  padding: 20px;
+  border: 10px solid rgb(109, 11, 11);
+}
+
+
+
 .btn-close{
   position: absolute;
   left: 95%;
@@ -41,9 +62,10 @@ nav{
   overflow-x: scroll;
   word-break: keep-all; /* this is optional, so the words keep in one line */
   white-space: wrap;
+}
 
-
-  
+.img_tengo{
+  border-radius: 20px;
 }
 
 .reclama{
@@ -72,13 +94,13 @@ nav{
 .reclama p:nth-child(3){
   position: absolute;
   left: 40% !important;
-  top: 56%;
+  top: 58%;
 }
 
 .reclama p:nth-child(4){
   position: absolute;
   left: 40% !important;
-  top: 62%;
+  top: 64%;
 }
 
 .card{

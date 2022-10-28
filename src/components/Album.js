@@ -11,7 +11,6 @@ export const Album = ({ setAlbum, index }) => {
   console.log(data);
   console.log(data[0].pais);
   const verifica = (idBuscar) => {
-    console.log(idBuscar);
     let resultados = misFichas.filter(
       function (obj) { return obj.ficha.id === idBuscar }
     );
@@ -26,13 +25,25 @@ export const Album = ({ setAlbum, index }) => {
   };
 
   const cambios=async(id)=>{
-    let resultados = misFichas.find(obj => obj.ficha.id === id).pegado = true;
+    console.log(`pegar esta ${id} en el usuario ${usuario}`)
+    //let resultados = misFichas.find(obj => obj.ficha.id === id).pegado = true;
     let fichasC = await fetch(
       `http://localhost:8080/api/usuario/pegar_ficha/${usuario}/${id}`, 
     {method:"PUT", 
     headers: {
       'Content-Type': 'application/json'
     }})
+    let fichasU = await fichasC.json()
+    let fichasT = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
+    {method:"PUT", 
+    body: JSON.stringify(fichasU),
+    headers: {
+      'Content-Type': 'application/json'
+    }})
+    fichasU = await fichasT.json()
+    console.log(fichasU)
+    setMisFichas(fichasU);
+    //setMisFichas(misFichas);
   };
 
 
