@@ -55,11 +55,13 @@ b{
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 5%;
+  height: 60%;
 }
 .jugadores-2{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 60%;
 }
 
 .jugadores{
@@ -75,16 +77,36 @@ b{
 
 .img_tengo{
   border-radius: 20px;
+  position: relative !important;
+  
+}
+
+.imagen-selec{
+  position: relative !important;
+}
+
+.seleccionada{
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  
 }
 
 .reclama{
-  margin-top: 10%;
+  margin-top: 4%;
   height: 65% !important;
   background-color: rgb(48, 48, 48);
   color: white;
   width: 30%;
   margin-left: 35%;
   border-radius: 20px;
+}
+
+.reclama:hover{
+  background-color: #0e0e0e;
+  color: #6e1010;
+  
+  outline: #6e1010 solid 6px;
 }
 
 .reclama img{
@@ -106,26 +128,27 @@ b{
 
 
 
-.reclama p:nth-child(2){
-  position: absolute;
-  left: 50% !important;
-  top: 60%;
+.reclama p:nth-child(1){
+  position: relative;
+  text-align: center;
+  padding-top: 5%;
+
 }
 
 .reclama p:nth-child(3){
-  position: absolute;
-  left: 40% !important;
+  position: relative;
+  text-align: center;
   top: 68%;
 }
 
 .reclama p:nth-child(4){
-  position: absolute;
-  left: 40% !important;
-  top: 75%;
+  position: relative;
+  text-align: center;
+  top: 70%;
 }
 
 .card{
-  height: 90% !important;
+  height: 95% !important;
   width: 16% !important;
   background-color: #6d1244;
 }
@@ -143,12 +166,14 @@ b{
 
 .fifa{
   left: 40%;
-  top:5%;
+  top:88%;
+  position: absolute !important;
 }
 
 .nombre_pais{
   font-size: 4rem !important;
   left: 40% !important;
+  color: #000 !important;
 }
 
 .triangulo-der{
@@ -164,7 +189,6 @@ b{
 .pegar{
   position: absolute !important;
   z-index: 1200 !important;
-  background-color: #48ff00;
   width: 40%;
   height: 40%;
   left: 30%;
@@ -212,6 +236,25 @@ b{
   position: relative !important;
   text-align: center;
 }
+.pestana{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: #811010;
+  background-color: #111;
+  padding: 20px;
+}
+
+.pestana p:hover{
+  color: #fff;
+}
+.ofrecen{
+  color: #fff;
+}
+.invita{
+  padding-left: 2%;
+  color: #fff !important;
+}
 .mis-fichas{
   background-color: rgb(63, 63, 63);
   width: 80%;
@@ -240,9 +283,9 @@ b{
 
 .titulo{
   color: rgb(242, 227, 227);
-  position: absolute;
-  left: 40%;
-  padding-top: 2%;
+  position: relative;
+  text-align: center;
+  margin-top: 3%;
 }
 
 .logo-panini{
@@ -264,6 +307,29 @@ code {
   width: 80vw;
   left: 12vw;
 }
+
+.fondo_login{
+  border-width:2px;
+  border-style:solid;
+  border-color:black;
+  position: relative;
+  width: 86vw;
+  left: 7vw;
+  background-color: rgb(48, 48, 48);
+  color: #fff;
+  height: 100vh;
+}
+.flex_log{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 3%;
+}
+
+.flex_log *{
+  margin-top: 1%;
+}
 .jugadores-equipo{
   position: absolute;
   top:18%;
@@ -271,6 +337,7 @@ code {
   left: 5%;
   background-color: #002bff;
   padding-right: 5%;
+  height: 50%;
 }
 .fondo-album{
   background-color: aqua;
@@ -294,11 +361,26 @@ code {
   top:85% !important;
 }
 
+.enter{
+  background-color: #6e1010;
+  border-radius: 10px;
+}
+
+.enter:hover{
+  background-color: #811010;
+  
+}
+
+.tituloLog{
+  text-align: center;
+  padding-top: 20%;
+}
+
 
 
 .morado{
   position: relative;
-  height: fit-content;
+  height: 100% !important;
   object-fit:fill;
 
 }

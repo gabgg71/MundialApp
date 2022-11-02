@@ -24,26 +24,10 @@ const App =()=> {
 
     let salida2 = await respuesta2.json()
     setData(salida2);
-
-    //obtener usuario
-    let fichas = await fetch(`http://localhost:8080/api/usuario/obtener_fichas/${usuario}`, {method:"GET", 
-    headers: {
-      'Content-Type': 'application/json'
-    }})
-    let fichasU = await fichas.json()
-    let fichasC = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
-    {method:"PUT", 
-    body: JSON.stringify(fichasU),
-    headers: {
-      'Content-Type': 'application/json'
-    }})
-    fichasU = await fichasC.json()
-    console.log(fichasU);
-    setMisFichas(fichasU);
-
+    localStorage.removeItem("usuario");
   }, false);
   return (
-    <userContext.Provider value={{data, setData, misFichas, setMisFichas, usuario}}>
+    <userContext.Provider value={{data, setData, misFichas, setMisFichas, usuario, setUsuario}}>
       <AppRouter/>
     </userContext.Provider>
   )
