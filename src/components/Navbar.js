@@ -13,13 +13,13 @@ export const Navbar =({setIntercambio})=>{
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Mi album</a>
+        <a class="nav-link active" aria-current="page" href="#">Mi Album</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onClick={()=>{setIntercambio(true)}}>Intercambiar fichas</a>
+        <a class="nav-link" onClick={()=>{setIntercambio(true)}}>Intercambiar Fichas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost:3000">Cerrar sesion</a>
+        <a class="nav-link" href="http://localhost:3000">Cerrar Sesion</a>
       </li>
       <li class="nav-item">
         <img src="https://www.dafont.com/forum/attach/orig/6/4/646689.png?1" className="logo-panini"></img>
