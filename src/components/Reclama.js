@@ -3,11 +3,12 @@ import { userContext } from '../hooks/useContext';
 
 export const Reclama=({setReclama})=>{
     let { misFichas, setMisFichas, usuario } = useContext(userContext);
-    const [nueva, setNueva] = useState({})
+    const [paquete, setNueva] = useState([])
     const obtenerFicha = async()=>{
     let fichasC = await fetch(
         `http://localhost:8080/api/fichas/random`, 
         {method:"GET", 
+
         headers: {
         'Content-Type': 'application/json'
         }})
@@ -39,12 +40,19 @@ export const Reclama=({setReclama})=>{
             <button type="button" className="btn-close" aria-label="Close" onClick={()=>{setReclama(false)}}></button>
             <h1 className='titulo'>Reclama</h1>
             <div className="reclama">
-                <p>{nueva.jugador}</p>
-                <div className='ajuste'>
-                    <img src={nueva.imagen}></img>
-                </div>
+            {paquete.map((nueva, ind)=>(
+                    <>
+                    <p>{nueva.jugador}</p>
+                    <div className='ajuste'>
+                        <img src={nueva.imagen}></img>
+                    </div>
                     <p>{nueva.rol}</p>
                     <p>{nueva.equipo}</p>
+                    </>
+
+                )
+                )}
+                
             </div>
             <button className="glow-on-hover reclamaB" onClick={() => { obtenerFicha() }}>Reclamar ficha</button>
         </div>

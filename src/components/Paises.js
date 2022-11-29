@@ -15,7 +15,7 @@ export const Paises =({setPaises, setIndice})=>{
             <div className='grid'>
             {data.map((obj, ind)=>(
                 <div className="pais" onClick={()=>{presionarPais(ind)}}>
-                <img src={obj.imagen} class="card-img-top"></img>
+                <img src={obj.imagen} className="card-img-top"></img>
                 <p className='nombre-p'>{obj.pais}</p>
               </div>
             ))}

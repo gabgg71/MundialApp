@@ -18,7 +18,7 @@ nav{
   display: flex;
   flex-direction: row;
   width: 60vw;
-  margin-top: 8%;
+  margin-top: 3%;
   margin-left: 2%;
   overflow-y: scroll;
   overflow-x: scroll;
@@ -40,6 +40,18 @@ b{
   color: white;
   padding: 20px;
   border: 10px solid rgb(109, 11, 11);
+}
+
+.tarjeta_prop{
+  width: 90%;
+  flex: 0 0 20%;
+  
+  white-space: nowrap;
+  background: rgb(0, 0, 0);
+  color: white;
+  padding: 20px;
+  border: 10px solid rgb(109, 11, 11);
+
 }
 
 
@@ -92,13 +104,22 @@ b{
   
 }
 
+.flexi{
+  display: flex;
+  flex-direction: column;
+}
+
+.propuesta{
+  width: 20%;
+}
+
 .reclama{
   margin-top: 4%;
   height: 65% !important;
   background-color: rgb(48, 48, 48);
   color: white;
-  width: 30%;
-  margin-left: 35%;
+  width: 80%;
+  margin-left: 15%;
   border-radius: 20px;
 }
 

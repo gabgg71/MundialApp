@@ -7,7 +7,7 @@ const App =()=> {
   let [misFichas, setMisFichas] =useState([])
   let [usuario, setUsuario] =useState(1)
 
-  window.addEventListener('load', 
+  /*window.addEventListener('load', 
     async()=> { 
     let respuesta = await fetch(`http://localhost:8080/api/equipos/obtener`, {method:"GET", 
     headers: {
@@ -25,7 +25,7 @@ const App =()=> {
     let salida2 = await respuesta2.json()
     setData(salida2);
     localStorage.removeItem("usuario");
-  }, false);
+  }, false);*/
   return (
     <userContext.Provider value={{data, setData, misFichas, setMisFichas, usuario, setUsuario}}>
       <AppRouter/>

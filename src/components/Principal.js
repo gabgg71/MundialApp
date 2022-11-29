@@ -12,18 +12,23 @@ export const Principal=()=>{
     const [album, setAlbum] = useState(false)
     const [reclama, setReclama] = useState(false)
     const [intercambio, setIntercambio] = useState(false)
-    let { data, setData, misFichas, setMisFichas, usuario, setUsuario } = useContext(userContext);
+    let { setData, setMisFichas,  setUsuario } = useContext(userContext);
 
     window.addEventListener('load', 
     async()=> { 
         let usId = parseInt(localStorage.getItem("usuario"));
-        console.log(usId)
-        setUsuario(usId);
-    let respuesta = await fetch(`http://localhost:8080/api/equipos/obtener`, {method:"GET", 
+        let respuesta = await fetch(`http://localhost:8080/api/usuario/${usId}`, {method:"GET", 
+        headers: {
+          'Content-Type': 'application/json'
+        }})
+        let salida = await respuesta.json()
+        setUsuario(salida);
+      
+    respuesta = await fetch(`http://localhost:8080/api/equipos/obtener`, {method:"GET", 
     headers: {
       'Content-Type': 'application/json'
     }})
-    let salida = await respuesta.json()
+    salida = await respuesta.json()
     let respuesta2 = await fetch(`http://localhost:8080/api/fichas/obtener_con_jugadores`, 
     {
         method:"POST", 
