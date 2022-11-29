@@ -76,24 +76,30 @@ export const Login = () => {
   
   
   const { lEmail, lPassword } = loginData;
-  
+  //https://ep01.epimg.net/estaticos/arc/2021/12/laliga-panini/images/futbolista.png
 
   return (
     <div className="App">
       <div className="fondo_login">
-        <h1 className='tituloLog'>Login</h1>
+        <h1 className='tituloLog'></h1>
+        <img className='letraMundial' src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg/800px-Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg.png'></img>
+        <div className='lineaLogin'></div>
+        <div className='lineaLogin' style={{left: '63%'}}></div>
+        <img className="logoPaniniLogin" src="http://cdn.shopify.com/s/files/1/0561/4639/5336/products/IMG_1761.jpg?v=1662308880"></img>
+        <img className="logoFifa" src="https://digitalhub.fifa.com/m/58223e0c1caa5674/original/FIFA-logo.png"></img>
+        <img className="logoMundial" src="https://logodownload.org/wp-content/uploads/2018/07/world-cup-2022-logo-1.png"></img>
         <div className='flex_log'>
  
           <input
             type="text"
-            placeholder="Correo"
+            placeholder="E-mail"
             className="email"
             name="lEmail"
             value={lEmail}
             onChange={handleLoginData}
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             className="password"
             name="lPassword"
@@ -103,7 +109,7 @@ export const Login = () => {
           <button className="enter" onClick={login}>Login</button>
        {error!=="" && <p>{error}</p>}
         <p className="grey">
-          Aun no tienes una cuenta? <a href="/register">Registrate</a>
+          ¿Aún no tienes una cuenta? <a href="/register">Registrate</a>
         </p>
           </div>
       </div>
