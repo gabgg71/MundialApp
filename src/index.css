@@ -24,7 +24,7 @@ nav{
   width: 60vw;
   margin-top: 3%;
   margin-left: 2%;
-  overflow-y: scroll;
+  
   overflow-x: scroll;
   background-color: rgb(48, 48, 48);
 }
@@ -35,9 +35,16 @@ b{
   text-align: center;
 }
 
+.centro{
+  margin-left: 45%;
+  margin-top: 5%;
+}
+
 .tarjeta{
   width: 5vw !important;
   flex: 0 0 20%;
+  overflow-x:hidden;
+
   
   white-space: nowrap;
   background: rgb(0, 0, 0);
@@ -48,13 +55,16 @@ b{
 
 .tarjeta_prop{
   width: 90%;
-  flex: 0 0 20%;
-  
   white-space: nowrap;
   background: rgb(0, 0, 0);
   color: white;
-  padding: 20px;
+  padding: 30px;
+  margin-left: 5%;
+  margin-top: 2vh;
   border: 10px solid rgb(109, 11, 11);
+  display: flex;
+  flex-direction: row;
+  
 
 }
 
@@ -111,6 +121,8 @@ b{
 .flexi{
   display: flex;
   flex-direction: column;
+  width: 50%;
+  height: 20vh;
 }
 
 .propuesta{
@@ -276,8 +288,8 @@ b{
   width: 100%;
   top: 20%;
   z-index: 500;
-  grid-template-rows: repeat(4, 10vw);
-  grid-template-columns: repeat(6, 10vh);
+  grid-template-rows: repeat(5, 10vw);
+  grid-template-columns: repeat(5, 10vh);
   overflow: scroll;
 }
 .card img{
@@ -302,6 +314,7 @@ b{
   color: #811010;
   background-color: #111;
   padding: 20px;
+  height: 8vh;
 }
 
 .pestana p:hover{
@@ -309,10 +322,28 @@ b{
 }
 .ofrecen{
   color: #fff;
+  height: 68vh;
+  overflow-y: scroll;
+  
+}
+
+.propuesta-g{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  position: relative;
+  height: 70%;
+  width: 100%;
+  z-index: 500;
+  overflow-y: scroll;
 }
 .invita{
   padding-left: 2%;
   color: #fff !important;
+}
+
+.gris{
+  background-color: rgb(63, 63, 63) !important;
 }
 .mis-fichas{
   background-color: rgb(63, 63, 63);
@@ -325,6 +356,13 @@ b{
   border-radius: 10px;
   /*background: url("https://st2.depositphotos.com/5545370/12193/v/950/depositphotos_121936302-stock-illustration-russian-background-vector-illustration.jpg") 60% 50%;*/
   box-shadow: 10px 10px 10px 10px #111;
+  
+}
+
+.scrollable{
+  overflow-y: scroll;
+  
+  
 }
 
 .paises{
@@ -622,7 +660,7 @@ code {
 
 .morado{
   position: absolute;
-  height: 100% !important;
+  height: 100%;
   object-fit:fill;
   border-radius: 10px;
 }

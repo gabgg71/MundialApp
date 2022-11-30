@@ -24,6 +24,7 @@ export const Principal=()=>{
         }})
         let salida = await respuesta.json()
         setUsuario(salida);
+        console.log(salida)
       
     respuesta = await fetch(`http://localhost:8080/api/equipos/obtener`, {method:"GET", 
     headers: {
@@ -37,7 +38,7 @@ export const Principal=()=>{
         headers: {
         'Content-Type': 'application/json'
       }})
-      salida = await respuesta.json()
+      salida = await respuesta2.json()
       respuesta2 = await fetch(`http://localhost:8080/api/fichas/obtener_con_jugadores`, 
       {
           method:"POST", 

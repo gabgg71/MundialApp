@@ -106,15 +106,16 @@ export const Album = ({ setAlbum, index }) => {
   }
 
   const cambios=async(id)=>{
-    console.log(`pegar esta ${id} en el usuario ${usuario}`)
+    console.log(`pegar esta ${id} en el usuario ${usuario.id}`)
     //let resultados = misFichas.find(obj => obj.ficha.id === id).pegado = true;
     let fichasC = await fetch(
-      `http://localhost:8080/api/usuario/pegar_ficha/${usuario}/${id}`, 
+      `http://localhost:8080/api/usuario/pegar_ficha/${usuario.id}/${id}`, 
     {method:"PUT", 
     headers: {
       'Content-Type': 'application/json'
     }})
     let fichasU = await fichasC.json()
+    console.log(fichasU)
     let fichasT = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
     {method:"PUT", 
     body: JSON.stringify(fichasU),
