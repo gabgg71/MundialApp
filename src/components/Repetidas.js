@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { userContext } from '../hooks/useContext';
 export const Repetidas =({setRepetidas})=>{
     let { misFichas} = useContext(userContext);
@@ -12,9 +12,9 @@ export const Repetidas =({setRepetidas})=>{
             <div className="fichas_tengo">
             {misFichas.map((obj,ind)=>(
               (obj.cantidad>1)?(
-                <div className="tarjeta" key={ind+"rep"}>
+                <div className="tarjeta" key={obj.ficha.id+"r"}>
                     <b className='nombre_jugador_miFicha'>{obj.ficha.jugador}</b>
-                    <img src={obj.ficha.imagen} class="img_tengo"></img>
+                    <img src={obj.ficha.imagen} class="img_tengo" alt='repetido'></img>
                     <p className='rol_jugador_miFicha'>{obj.ficha.rol}</p>
                     <p className='rol_jugador_miFicha'>{obj.ficha.equipo}</p>
                 

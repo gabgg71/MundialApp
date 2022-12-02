@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { userContext } from '../hooks/useContext';
 export const Paises =({setPaises, setIndice})=>{
     let { data } = useContext(userContext);
@@ -16,7 +16,7 @@ export const Paises =({setPaises, setIndice})=>{
             <div className='grid'>
             {data.map((obj, ind)=>(
                 <div className="pais" onClick={()=>{presionarPais(ind)}} key={ind+"p"}>
-                    <img src={obj.imagen} class="card-img-top"></img>
+                    <img src={obj.imagen} class="card-img-top" alt='pais'></img>
                     <p className='nombre-p'>{obj.pais}</p>
                 </div>
             ))}

@@ -16,10 +16,10 @@ export const Navbar =({setIntercambio})=>{
         <a class="nav-link active" aria-current="page" href="#">Mi Album</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onClick={()=>{setIntercambio(true)}}>Intercambiar Fichas</a>
+        <a class="nav-link" onClick={()=>{setIntercambio(true);}}>Intercambiar Fichas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={window.location.pathname="/"}>Cerrar Sesion</a>
+        <a class="nav-link" onClick={()=>{localStorage.removeItem('usuario'); window.location.href =window.location.origin}}>Cerrar Sesion</a>
       </li>
       <li class="nav-item">
         <img src="https://www.dafont.com/forum/attach/orig/6/4/646689.png?1" className="logo-panini"></img>

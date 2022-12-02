@@ -41,7 +41,7 @@ export const Intercambio=({setIntercambio})=>{
 
    const enviarPeticion=async(data, metodo, endpoint)=>{
     let respuesta = await fetch(
-      `${process.env.BACK}/usuario/${endpoint}`, 
+      `${process.env.REACT_APP_BACKEND}/usuario/${endpoint}`, 
     {method:metodo, 
     body: JSON.stringify(data),
     headers: {
@@ -58,7 +58,7 @@ export const Intercambio=({setIntercambio})=>{
 
    const enviarPeticionPro=async(data,ind,  metodo, endpoint)=>{
     let respuesta = await fetch(
-      `${process.env.BACK}/usuario/${endpoint}`, 
+      `${process.env.REACT_APP_BACKEND}/usuario/${endpoint}`, 
     {method:metodo, 
     body: JSON.stringify(data),
     headers: {
@@ -103,12 +103,12 @@ export const Intercambio=({setIntercambio})=>{
       await enviarPeticion(propuesta, "PUT","intercambio");
       let salida = usuario.propuestas.filter((pro, i) => pro !== propuesta)
       setUsuario({...usuario,  propuestas: salida})
-      let fichas = await fetch(`${process.env.BACK}/usuario/obtener_fichas/${usuario.id}`, {method:"GET", 
+      let fichas = await fetch(`${process.env.REACT_APP_BACKEND}/usuario/obtener_fichas/${usuario.id}`, {method:"GET", 
       headers: {
         'Content-Type': 'application/json'
       }})
       let fichasU = await fichas.json()
-      let fichasC = await fetch(`${process.env.BACK}/fichas/fichas_user`, 
+      let fichasC = await fetch(`${process.env.REACT_APP_BACKEND}/fichas/fichas_user`, 
       {method:"PUT", 
       body: JSON.stringify(fichasU),
       headers: {
@@ -134,7 +134,7 @@ export const Intercambio=({setIntercambio})=>{
                 <div className="fichas_tengo">
             {misFichas.map((obj, ind)=>(
               (obj.cantidad>1)?(
-                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={ind}>
+                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={obj.ficha.id}>
                     <b>{obj.ficha.jugador}</b>
                     <div className='imagen-selec'>
                     <img src={obj.ficha.imagen} class="img_tengo"></img>
@@ -173,7 +173,7 @@ export const Intercambio=({setIntercambio})=>{
             </div>
             {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
               (obj.tipo === "propuesta" && opcionSel === 1)?(
-                <div className="tarjeta_prop" key={ind}>
+                <div className="tarjeta_prop" key={obj.de+obj.ofreceImg}>
                     <div className='flexi'>
                     <p>{obj.de} te ofrece</p>
                     <div className='propuesta'>
@@ -226,7 +226,7 @@ export const Intercambio=({setIntercambio})=>{
                 )
                 }
             </div>}
-            {opcionSel === 2 && <div className='ofrecen'><p>Sella intercambios</p>
+            {opcionSel === 2 && <div className='ofrecen'>
             {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
               (obj.tipo === "contra")?(
                 <div className="tarjeta_prop" key={ind}>
@@ -265,10 +265,10 @@ export const Intercambio=({setIntercambio})=>{
                 }
                 </div>}
             {opcionSel === 3 && <div className='ofrecen'>
-              <p>Estas contrapropuestas fueron rechazadas, Tienes algo mejor que ofrecer?</p>
+              
               {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
               (obj.tipo === "rechazo")?(
-                <div className="tarjeta_prop" key={ind}>
+                <div className="tarjeta_prop" key={obj.de+obj.ofreceImg}>
                     <div className='flexi'>
                     <p>{obj.de} te ofrecio</p>
                     <div className='propuesta'>
@@ -304,11 +304,11 @@ export const Intercambio=({setIntercambio})=>{
               </div>}
             {responde && <div className="paises gris">
             <button type="button" className="btn-close" aria-label="Close" onClick={()=>{setResponde(false); setSeleccionada("")}}></button>
-            <p className='selecciona'>Selecciona</p>
+            <p className='selecciona invita'>Escoge tu ofrecimiento</p>
             <div className="propuesta-g">
             {misFichas.map((obj, ind)=>(
               (obj.cantidad>1)?(
-                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={ind}>
+                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={obj.ficha.id}>
                     <b>{obj.ficha.jugador}</b>
                     <div className='imagen-selec'>
                     <img src={obj.ficha.imagen} class="img_tengo"></img>

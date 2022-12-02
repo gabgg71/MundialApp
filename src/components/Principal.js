@@ -74,7 +74,7 @@ export const Principal=()=>{
         <>
         <div className="App">
             <div className='fondo'>
-              <img src='https://images8.alphacoders.com/128/1286559.jpg'></img>
+              <img src='https://images8.alphacoders.com/128/1286559.jpg' alt='fondo'></img>
               {fichas && <Fichas setFichas={setFichas}/>}
               {album && <Album setAlbum={setAlbum} index={0}/>}
               {reclama && <Reclama setReclama={setReclama}/>}

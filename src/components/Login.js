@@ -12,7 +12,7 @@ export const Login = () => {
   let { setMisFichas, setUsuario } = useContext(userContext);
   const [error, setError] = useState("")
 
-    
+  
 
   const [loginData, handleLoginData] = useForm({
     email: "",
@@ -52,7 +52,7 @@ export const Login = () => {
       }})
       fichasU = await fichasA.json()
       setMisFichas(fichasU);
-      window.location.href = `${window.location.href}principal`;
+      window.location.href = `${window.location.origin}/principal`;
     }else{
       setError("Error, credenciales invalidas");
       setTimeout(()=>{

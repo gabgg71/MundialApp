@@ -10,8 +10,8 @@ export const AppRouter = () => {
       <div>
         <Routes>
           <Route exact path="/" element={<Login/>} />
-          <Route exact path="/principal" element={<Principal/>} />
           <Route exact path="/register" element={<Register/>} />
+          {localStorage.getItem("usuario") && <Route exact path="/principal" element={<Principal/>} />}
           <Route path="*" element={<Login />} />
         </Routes>
       </div>

@@ -47,7 +47,7 @@ export const Register = () => {
             let fichasU = await fichasC.json()
             if(fichasU.id >-1){
             localStorage.setItem("usuario", fichasU.id);
-            window.location.href = `${window.location.href}principal`;
+            window.location.href = `${window.location.origin}/principal`;
             }
         }
   }
@@ -73,7 +73,7 @@ export const Register = () => {
             onChange={handleLoginData}
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             className="password"
             name="lPassword"
