@@ -6,80 +6,74 @@ import { Reclama } from './Reclama';
 import { Repetidas } from './Repetidas';
 import { Intercambio } from './Intercambio';
 import { userContext } from '../hooks/useContext';
-import { getValue } from '@testing-library/user-event/dist/utils';
 export const Principal=()=>{
     const [fichas, setFichas] = useState(false)
     const [repetidas, setRepetidas] = useState(false)
     const [album, setAlbum] = useState(false)
     const [reclama, setReclama] = useState(false)
     const [intercambio, setIntercambio] = useState(false)
-    let { setData, setMisFichas,  setUsuario } = useContext(userContext);
+    let {setData, setMisFichas,  setUsuario } = useContext(userContext);
 
     window.addEventListener('load', 
     async()=> { 
-        let usId = parseInt(localStorage.getItem("usuario"));
-        let respuesta = await fetch(`http://localhost:8080/api/usuario/${usId}`, {method:"GET", 
-        headers: {
-          'Content-Type': 'application/json'
-        }})
-        let salida = await respuesta.json()
-        setUsuario(salida);
-        console.log(salida)
+      document.querySelector(".botAlbum").disabled= true
+      document.querySelector(".botReclamar").disabled= true
+      let usId = parseInt(localStorage.getItem("usuario"));
+      let respuesta = await fetch(`${process.env.REACT_APP_BACKEND}/usuario/${usId}`, {method:"GET", 
+      headers: {
+        'Content-Type': 'application/json'
+      }})
+      let salida = await respuesta.json()
+      setUsuario(salida);
       
-    respuesta = await fetch(`http://localhost:8080/api/equipos/obtener`, {method:"GET", 
+    respuesta = await fetch(`${process.env.REACT_APP_BACKEND}/equipos/obtener`, {method:"GET", 
     headers: {
       'Content-Type': 'application/json'
     }})
     salida = await respuesta.json()
-    let respuesta2 = await fetch(`http://localhost:8080/api/fichas/obtener_con_jugadores`, 
+    let respuesta2 = await fetch(`${process.env.REACT_APP_BACKEND}/fichas/obtener_con_jugadores`, 
     {
-        method:"POST", 
-        body:JSON.stringify(salida),
+      method:"POST", 
+      body:JSON.stringify(salida),
         headers: {
         'Content-Type': 'application/json'
       }})
       salida = await respuesta2.json()
-      respuesta2 = await fetch(`http://localhost:8080/api/fichas/obtener_con_jugadores`, 
+      respuesta2 = await fetch(`${process.env.REACT_APP_BACKEND}/fichas/obtener_con_jugadores`, 
       {
-          method:"POST", 
-          body:JSON.stringify(salida),
-          headers: {
+        method:"POST", 
+        body:JSON.stringify(salida),
+        headers: {
           'Content-Type': 'application/json'
-          }})
-
-      let salida2 = await respuesta2.json()
-      setData(salida2);
-
-      //obtener usuario
-      let fichas = await fetch(`http://localhost:8080/api/usuario/obtener_fichas/${usId}`, {method:"GET", 
+        }})
+        
+        let salida2 = await respuesta2.json()
+        setData(salida2);
+        
+        //obtener usuario
+      let fichas = await fetch(`${process.env.REACT_APP_BACKEND}/usuario/obtener_fichas/${usId}`, {method:"GET", 
       headers: {
         'Content-Type': 'application/json'
       }})
       let fichasU = await fichas.json()
-      console.log(fichasU)
-      let fichasC = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
+      let fichasC = await fetch(`${process.env.REACT_APP_BACKEND}/fichas/fichas_user`, 
       {method:"PUT", 
       body: JSON.stringify(fichasU),
       headers: {
         'Content-Type': 'application/json'
       }})
       fichasU = await fichasC.json()
-      console.log(fichasU);
       setMisFichas(fichasU);
+      document.querySelector(".botAlbum").disabled= false
+      document.querySelector(".botReclamar").disabled= false
       
     }, false);
 
    
-  
-    //Otros fondos:
-    //https://cdn.wallpapersafari.com/14/72/tZuvSK.jpg
-
     return (
         <>
         <div className="App">
             <div className='fondo'>
-
-            
               <img src='https://images8.alphacoders.com/128/1286559.jpg'></img>
               {fichas && <Fichas setFichas={setFichas}/>}
               {album && <Album setAlbum={setAlbum} index={0}/>}

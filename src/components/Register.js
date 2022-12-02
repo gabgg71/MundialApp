@@ -2,17 +2,13 @@
   width: 98%;
   padding:5% 1%;
 }*/ 
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useForm } from "../hooks/useForm";
 
 
 
 export const Register = () => {
 
-  let [user, setUser] = useState({
-    "email": "",
-    "password": "",
-  });
   const [error, setError] = useState("")
     
 
@@ -24,7 +20,6 @@ export const Register = () => {
   const { lEmail, lPassword } = loginData;
   
   const registro =async()=>{
-      console.log(lEmail)
     if(lEmail ===undefined || lEmail ==="" || lPassword === undefined || lPassword === ""){
         setError("Error, datos incompletos");
         setTimeout(()=>{
@@ -37,13 +32,12 @@ export const Register = () => {
             "fichas":[]
         }
         let fichasC = await fetch(
-          `http://localhost:8080/api/usuario/guardar`, 
+          `${process.env.REACT_APP_BACKEND}/usuario/guardar`, 
         {method:"POST", 
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
         }})
-        console.log(`FICHAS C ${fichasC.status}`)
         if(fichasC.status >400 || fichasC.status ==="500"){
             setError("Error, este correo ya existe");
             setTimeout(()=>{
@@ -53,32 +47,10 @@ export const Register = () => {
             let fichasU = await fichasC.json()
             if(fichasU.id >-1){
             localStorage.setItem("usuario", fichasU.id);
-            window.location.href = 'http://localhost:3000/principal';
+            window.location.href = `${window.location.href}principal`;
             }
         }
   }
-
-  /*
-  if(fichasU.existe){
-    localStorage.setItem("usuario", fichasU.us.id);
-    setUsuario(fichasU.us.id);
-    let fichasA = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
-    {method:"PUT", 
-    body: JSON.stringify(fichasU.us.fichas),
-    headers: {
-      'Content-Type': 'application/json'
-    }})
-    fichasU = await fichasA.json()
-    console.log(fichasU);
-    setMisFichas(fichasU);
-    console.log(misFichas)
-    window.location.href = 'http://localhost:3000/principal';
-  }else{
-    setError(true);
-    setTimeout(()=>{
-      setError(false);
-    }, 3000)
-  }*/
   }
 
   

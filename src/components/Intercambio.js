@@ -5,13 +5,12 @@ export const Intercambio=({setIntercambio})=>{
     const [opcionSel, setOpcion] = useState(0)
     const [responde, setResponde] = useState(false)
     const [activo, setActivo] = useState()
-    const [ultimo, setUltimo] = useState()
     const [seleccionada, setSeleccionada] = useState({
       "id":-1
     })
     const [respuestas, setRespuesta] = useState()
     const [msg, setMsg] = useState(false);
-    let { misFichas, usuario, setUsuario, data } = useContext(userContext);
+    let { misFichas, setMisFichas,  usuario, setUsuario } = useContext(userContext);
     const [envioData, handleLoginData] = useForm({
         "de": usuario.correo,
         "para":"",
@@ -19,29 +18,13 @@ export const Intercambio=({setIntercambio})=>{
         "ofreceImg":"",
         "tipo":"propuesta"
       });
-    const { para, ofrece } = envioData;
+    const { para } = envioData;
 
     const selecciona=(sel)=>{
-      if (seleccionada.id === sel.id){
-        setSeleccionada("")
-    }else{
-        setSeleccionada(sel)
-    }
-     /* if(seleccionada){
-        if (seleccionada.id === sel.id){
-            setSeleccionada("")
-        }else{
-            setSeleccionada(sel)
-        }
-      }else{
-        setSeleccionada(sel)
-
-      }*/
-        
-
+      (seleccionada.id === sel.id)?(setSeleccionada("")):(setSeleccionada(sel))
     }
 
-    const enviarContra =(propuesta)=>{
+    const enviarContra =(propuesta, ind)=>{
       let prop = {
         "de": propuesta.de,
         "para": propuesta.para,
@@ -51,63 +34,88 @@ export const Intercambio=({setIntercambio})=>{
         "ofreceCambio": seleccionada.imagen,
         "tipo": "contra"
       }
-      enviarPeticion(prop,"POST", "hacer_propuesta");
+      enviarPeticionPro(prop,ind, "POST", "hacer_propuesta");
     }
 
 
 
    const enviarPeticion=async(data, metodo, endpoint)=>{
-    console.log(`ESTO ES LO QUE ENVIO ${data}`)
     let respuesta = await fetch(
-      `http://localhost:8080/api/usuario/${endpoint}`, 
+      `${process.env.BACK}/usuario/${endpoint}`, 
     {method:metodo, 
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json'
     }})
-    console.log(respuesta.us)
   let salida = await respuesta.json()
-  console.log(salida)
-  setUltimo(salida.respuesta)
   setRespuesta(salida.respuesta)
   setTimeout(()=>{
       setRespuesta("")
-  }, 2000);
+  }, 3500);
   setSeleccionada("");
+
+   }
+
+   const enviarPeticionPro=async(data,ind,  metodo, endpoint)=>{
+    let respuesta = await fetch(
+      `${process.env.BACK}/usuario/${endpoint}`, 
+    {method:metodo, 
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }})
+  let salida = await respuesta.json()
+
+  setRespuesta(salida.respuesta)
+  setTimeout(()=>{
+      setRespuesta("")
+  }, 2500);
+  setSeleccionada("");
+  if(salida.respuesta ==="La propuesta fue enviada satisfactoriamente."){
+    let nuevasP = usuario.propuestas.map((pro, i) => {
+      if(i === ind){
+        pro.tipo = "gestionada"
+        pro.aCambio = seleccionada.id
+        pro.ofreceCambio = seleccionada.imagen
+      }
+      return pro
+    })
+    setUsuario({...usuario,  propuestas: nuevasP})
+  }
 
    }
 
    
 
    const pruebe=(ind)=>{
-  
     let salida = usuario.propuestas.filter((pro, i) => i !== ind)
     setUsuario({...usuario,  propuestas: salida})
-
-    
-   }
-
-   const enEnviar=(ind)=>{
-    console.log(ultimo)
-    let salida = usuario.propuestas.filter((pro, i) => i !== ind)
-    
-    if(ultimo ==="La propuesta fue enviada satisfactoriamente."){
-      setUsuario({...usuario,  propuestas: salida})
-    }
-
-
-
    }
 
 
     const enviarPropuesta =()=>{
-      
         envioData.ofrece = seleccionada.id;
         envioData.ofreceImg = seleccionada.imagen;
         enviarPeticion(envioData, "POST","hacer_propuesta");
     }
 
-    const intercambio=()=>{
+    const intercambio=async(propuesta)=>{
+      await enviarPeticion(propuesta, "PUT","intercambio");
+      let salida = usuario.propuestas.filter((pro, i) => pro !== propuesta)
+      setUsuario({...usuario,  propuestas: salida})
+      let fichas = await fetch(`${process.env.BACK}/usuario/obtener_fichas/${usuario.id}`, {method:"GET", 
+      headers: {
+        'Content-Type': 'application/json'
+      }})
+      let fichasU = await fichas.json()
+      let fichasC = await fetch(`${process.env.BACK}/fichas/fichas_user`, 
+      {method:"PUT", 
+      body: JSON.stringify(fichasU),
+      headers: {
+        'Content-Type': 'application/json'
+      }})
+      fichasU = await fichasC.json()
+      setMisFichas(fichasU);
 
     }
 
@@ -119,13 +127,14 @@ export const Intercambio=({setIntercambio})=>{
             <p onClick={()=>{setOpcion(0); }}>Proponer intercambio</p>
             <p onClick={()=>{setOpcion(1);  }}>Propuestas recibidas</p>
             <p onClick={()=>{setOpcion(2);  }}>Contrapropuestas recibidas</p>
-            <p onClick={()=>{setOpcion(3);  }}>Contrapropuestas rechazadas</p>
+            <p onClick={()=>{setOpcion(3);  
+            setSeleccionada("");}}>Contrapropuestas rechazadas</p>
             </div>
             {opcionSel === 0 && <div>
                 <div className="fichas_tengo">
             {misFichas.map((obj, ind)=>(
               (obj.cantidad>1)?(
-                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}}>
+                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={ind}>
                     <b>{obj.ficha.jugador}</b>
                     <div className='imagen-selec'>
                     <img src={obj.ficha.imagen} class="img_tengo"></img>
@@ -151,15 +160,20 @@ export const Intercambio=({setIntercambio})=>{
 
 
             </div>
-            <p>{respuestas}</p>
+            <p className='invita'>{respuestas}</p>
                 
                 </div>}
 
 
-            {opcionSel === 1 && <div className='ofrecen'>
-            {usuario.propuestas.map((obj, ind)=>(
-              (obj.tipo === "propuesta")?(
-                <div className="tarjeta_prop">
+            {(opcionSel === 1 || opcionSel === 5) && 
+            <div className='ofrecen'>
+            <div className='pestana'>
+            <p onClick={()=>{setOpcion(1); }}>Propuestas por atender</p>
+            <p onClick={()=>{setOpcion(5);  }}>Propuestas gestionadas</p>
+            </div>
+            {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
+              (obj.tipo === "propuesta" && opcionSel === 1)?(
+                <div className="tarjeta_prop" key={ind}>
                     <div className='flexi'>
                     <p>{obj.de} te ofrece</p>
                     <div className='propuesta'>
@@ -173,21 +187,37 @@ export const Intercambio=({setIntercambio})=>{
                     <img src={seleccionada.imagen} class="img_tengo"></img>
                     </div>
                     </div>}
-                    
-              
-
                     <div className='flexi'>
                       {msg && activo === ind && 
-                      <button className='enter' onClick={()=>{enviarContra(obj);  setTimeout(()=>{
-                        enEnviar(ind)
+                      <button className='enter' onClick={()=>{
+                        enviarContra(obj, ind);  
+                        setTimeout(()=>{
+                        
                     }, 2200);}}>Enviar</button>}
                         <button className='enter' onClick={()=>{setResponde(true); setActivo(ind);}}>Seleccionar ficha de cambio</button>
                         <button className='enter' onClick={()=>{enviarPeticion(obj, "DELETE", "elimina_propuesta");
                       pruebe(ind)}}>Rechazar</button>
+                      {activo === ind && <p className='separado'>{respuestas}</p>}
                     </div>
-                    {activo === ind && <p>{respuestas}</p>}
+                    
+                    
                   </div>
-              ):(<></>)
+              ):((obj.tipo === "gestionada" && opcionSel === 5)?(
+                <div className="tarjeta_prop">
+                <div className='flexi'>
+                <p>{obj.de} te ofrecio</p>
+                <div className='propuesta'>
+                <img src={obj.ofreceImg} class="img_tengo"></img>
+                </div>
+                </div>
+                <div className='flexi'>
+                <p>Tu ofreciste</p>
+                <div className='propuesta'>
+                <img src={obj.ofreceCambio} class="img_tengo"></img>
+                </div>
+                </div>
+              </div>
+              ):(<></>))
               
               
               
@@ -197,9 +227,9 @@ export const Intercambio=({setIntercambio})=>{
                 }
             </div>}
             {opcionSel === 2 && <div className='ofrecen'><p>Sella intercambios</p>
-            {usuario.propuestas.map((obj, ind)=>(
+            {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
               (obj.tipo === "contra")?(
-                <div className="tarjeta_prop">
+                <div className="tarjeta_prop" key={ind}>
                     <div className='flexi'>
                     <p>{obj.para} te ofrece</p>
                     <div className='propuesta'>
@@ -217,7 +247,7 @@ export const Intercambio=({setIntercambio})=>{
               
 
                     <div className='flexi'>
-                        <button className='enter' onClick={intercambio}>Aceptar</button>
+                        <button className='enter' onClick={()=>{intercambio(obj)}}>Aceptar</button>
                         <button className='enter' onClick={()=>{
                           enviarPeticion(obj,"PUT", "rechazar");
                           pruebe(ind);
@@ -236,9 +266,9 @@ export const Intercambio=({setIntercambio})=>{
                 </div>}
             {opcionSel === 3 && <div className='ofrecen'>
               <p>Estas contrapropuestas fueron rechazadas, Tienes algo mejor que ofrecer?</p>
-              {usuario.propuestas.map((obj, ind)=>(
+              {usuario.propuestas && usuario.propuestas.map((obj, ind)=>(
               (obj.tipo === "rechazo")?(
-                <div className="tarjeta_prop">
+                <div className="tarjeta_prop" key={ind}>
                     <div className='flexi'>
                     <p>{obj.de} te ofrecio</p>
                     <div className='propuesta'>
@@ -246,9 +276,9 @@ export const Intercambio=({setIntercambio})=>{
                     </div>
                     </div>
                     <div className='flexi'>
-                    <p>Lo que habias ofrecido</p>
+                    <p>{(seleccionada.imagen && "Lo que ofreces ahora") || "Lo que habias ofrecido"}</p>
                     <div className='propuesta'>
-                    <img src={obj.ofreceCambio} class="img_tengo"></img>
+                    <img src={(seleccionada.imagen)?(seleccionada.imagen):(obj.ofreceCambio)} class="img_tengo"></img>
                     </div>
                     </div>
                     
@@ -256,11 +286,12 @@ export const Intercambio=({setIntercambio})=>{
 
                     <div className='flexi'>
                       {msg && activo === ind && 
-                      <button className='enter' onClick={()=>{enviarContra(obj)}}>Enviar</button>}
+                      <button className='enter' onClick={()=>{enviarContra(obj, ind)}}>Enviar</button>}
                         <button className='enter' onClick={()=>{setResponde(true); setActivo(ind);}}>Tengo algo mejor</button>
                         <button className='enter' onClick={()=>{enviarPeticion(obj, "DELETE", "elimina_propuesta"); pruebe(ind);}}>Descartar</button>
+                        {activo === ind && <p className='separado'>{respuestas}</p>}
                     </div>
-                    {activo === ind && <p>{respuestas}</p>}
+                    
                   </div>
               ):(<></>)
               
@@ -277,7 +308,7 @@ export const Intercambio=({setIntercambio})=>{
             <div className="propuesta-g">
             {misFichas.map((obj, ind)=>(
               (obj.cantidad>1)?(
-                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}}>
+                <div className="tarjeta" onClick={()=>{selecciona(obj.ficha)}} key={ind}>
                     <b>{obj.ficha.jugador}</b>
                     <div className='imagen-selec'>
                     <img src={obj.ficha.imagen} class="img_tengo"></img>

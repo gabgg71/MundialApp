@@ -2,21 +2,16 @@
   width: 98%;
   padding:5% 1%;
 }*/ 
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from "../hooks/useForm";
-import { useSearchParams } from "react-router-dom";
 import { userContext } from '../hooks/useContext';
 
 
 
 export const Login = () => {
-  let { data, setData, misFichas, setMisFichas, usuario, setUsuario } = useContext(userContext);
+  let { setMisFichas, setUsuario } = useContext(userContext);
   const [error, setError] = useState("")
 
-  let [user, setUser] = useState({
-    "email": "",
-    "password": "",
-  });
     
 
   const [loginData, handleLoginData] = useForm({
@@ -37,31 +32,27 @@ export const Login = () => {
       "password": lPassword,
       "fichas":[]
   }
-    //window.location.href = 'http://localhost:3000/principal';
-  
+    console.log(process.env.REACT_APP_BACKEND)
     let fichasC = await fetch(
-      `http://localhost:8080/api/usuario/login`, 
+      `${process.env.REACT_APP_BACKEND}/usuario/login`, 
     {method:"POST", 
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json'
     }})
     let fichasU = await fichasC.json()
-    console.log(fichasU);
     if(fichasU.existe){
       localStorage.setItem("usuario", fichasU.us.id);
       setUsuario(fichasU.us.id);
-      let fichasA = await fetch(`http://localhost:8080/api/fichas/fichas_user`, 
+      let fichasA = await fetch(`${process.env.REACT_APP_BACKEND}/fichas/fichas_user`, 
       {method:"PUT", 
       body: JSON.stringify(fichasU.us.fichas),
       headers: {
         'Content-Type': 'application/json'
       }})
       fichasU = await fichasA.json()
-      console.log(fichasU);
       setMisFichas(fichasU);
-      console.log(misFichas)
-      window.location.href = 'http://localhost:3000/principal';
+      window.location.href = `${window.location.href}principal`;
     }else{
       setError("Error, credenciales invalidas");
       setTimeout(()=>{
@@ -76,7 +67,6 @@ export const Login = () => {
   
   
   const { lEmail, lPassword } = loginData;
-  //https://ep01.epimg.net/estaticos/arc/2021/12/laliga-panini/images/futbolista.png
 
   return (
     <div className="App">

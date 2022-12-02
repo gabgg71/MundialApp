@@ -19,7 +19,7 @@ export const Navbar =({setIntercambio})=>{
         <a class="nav-link" onClick={()=>{setIntercambio(true)}}>Intercambiar Fichas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost:3000">Cerrar Sesion</a>
+        <a class="nav-link" href={window.location.pathname="/"}>Cerrar Sesion</a>
       </li>
       <li class="nav-item">
         <img src="https://www.dafont.com/forum/attach/orig/6/4/646689.png?1" className="logo-panini"></img>
