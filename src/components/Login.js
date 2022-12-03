@@ -33,7 +33,7 @@ export const Login = () => {
       "fichas":[]
   }
     let fichasC = await fetch(
-      `${process.env.REACT_APP_BACKEND}/usuario/login`, 
+      `${process.env.REACT_APP_BACKEND}/usuario/login/`, 
     {method:"POST", 
     body: JSON.stringify(data),
     headers: {
