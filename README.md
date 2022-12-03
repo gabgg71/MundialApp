@@ -27,7 +27,8 @@
 
 ## Overview
 
-![screenshot](https://github.com/gabgg71/cat-wiki/blob/main/public/album.PNG?raw=true)
+
+![screenshot](https://github.com/gabgg71/MundialApp/blob/master/public/album.png?raw=true)
 
 
 
