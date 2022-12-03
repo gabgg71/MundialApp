@@ -32,7 +32,6 @@ export const Login = () => {
       "password": lPassword,
       "fichas":[]
   }
-    console.log(process.env.REACT_APP_BACKEND)
     let fichasC = await fetch(
       `${process.env.REACT_APP_BACKEND}/usuario/login`, 
     {method:"POST", 
